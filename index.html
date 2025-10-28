@@ -3,7 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi web HLC</title>
+    <title>Portfolio de Andrés Ruggiero – DAW</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+            color: #333;
+        }
+        header {
+            background: #1e293b;
+            color: #fff;
+            padding: 1rem 2rem;
+            text-align: center;
+        }
+        nav a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        section {
+            padding: 3rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1, h2 {
+            color: #1e293b;
+        }
+        .proyecto {
+            background: #fff;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #1d4ed8;
+        }
+        footer {
+            background: #1e293b;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+    </style>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-22SCQLEW80"></script>
@@ -11,13 +72,69 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-    
       gtag('config', 'G-22SCQLEW80');
     </script>
 </head>
 <body>
-    <h1>Bienvenido a mi sitio web...</h1>
-    <p>Este es un sitio creado para la práctica del módulo de Hora de Libre Configuración (DAW).</p>
+    <header>
+        <h1>Portfolio de Andrés Ruggiero</h1>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#proyectos">Proyectos</a>
+            <a href="#blog">Blog</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <section id="inicio">
+        <h2>Bienvenido</h2>
+        <p>Hola 👋 Soy Andrés Ruggiero, estudiante del ciclo de Desarrollo de Aplicaciones Web (DAW). Esta web forma parte de mi práctica del módulo de <strong>Hora de Libre Configuración (HLC)</strong>, donde aprendo sobre herramientas como Google Analytics, SEO y WordPress.</p>
+    </section>
+
+    <section id="proyectos">
+        <h2>Mis Proyectos</h2>
+        <input type="text" id="buscador" placeholder="Buscar proyecto..." oninput="buscarProyecto()">
+        <div id="listaProyectos">
+            <div class="proyecto"><h3>Proyecto 1: Página estática</h3><p>Primer proyecto HTML y CSS del curso.</p></div>
+            <div class="proyecto"><h3>Proyecto 2: Aplicación con JavaScript</h3><p>Simulación de carrito de compras.</p></div>
+            <div class="proyecto"><h3>Proyecto 3: Web con WordPress</h3><p>Blog personal instalado con un hosting gratuito.</p></div>
+        </div>
+    </section>
+
+    <section id="blog">
+        <h2>Blog</h2>
+        <p>Aquí comparto aprendizajes y avances del módulo HLC y de mis estudios en DAW.</p>
+        <button class="btn" onclick="registrarClick('leer_blog')">Leer más artículos</button>
+    </section>
+
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <p>Si quieres ponerte en contacto conmigo, puedes pulsar el botón de abajo.</p>
+        <button class="btn" onclick="registrarClick('boton_contacto')">Enviar mensaje</button>
+    </section>
+
+    <footer>
+        <p>© 2025 Andrés Ruggiero – Proyecto HLC</p>
+    </footer>
+
+    <script>
+        // Buscador interno (para medir búsquedas internas)
+        function buscarProyecto() {
+            const input = document.getElementById("buscador").value.toLowerCase();
+            const proyectos = document.querySelectorAll(".proyecto");
+            proyectos.forEach(p => {
+                p.style.display = p.innerText.toLowerCase().includes(input) ? "" : "none";
+            });
+            if (input.length > 0) {
+                gtag('event', 'busqueda_interna', { search_term: input });
+            }
+        }
+
+        // Seguimiento de clics en botones
+        function registrarClick(nombreEvento) {
+            gtag('event', nombreEvento, { 'event_category': 'interaccion', 'event_label': nombreEvento });
+            alert("Evento registrado: " + nombreEvento);
+        }
+    </script>
 </body>
 </html>
-
